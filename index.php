@@ -34,9 +34,22 @@
 				font-weight:normal;
 			}
 			
+			.event-tooltip {
+				
+				width:150px;
+				
+				height:100px;
+				
+				background:#FFF;
+				
+				border:1px solid #DDD;
+				
+				position:absolute;
+				
+				z-index:10001;
+			}
+			
 		</style>
-		
-		
 		
 	</head>
 	
