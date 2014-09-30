@@ -1,6 +1,6 @@
 <?php
 
-	// Require DB Connection
+	// Require DB Connection 
 	
 	require_once('connect.php');
 

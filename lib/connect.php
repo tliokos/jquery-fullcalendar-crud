@@ -1,6 +1,6 @@
 <?php
 
-	try {
+	try {  
 	
 	  $dbh = new PDO("mysql:host=localhost;dbname=calendar", 'root', '');
 	
