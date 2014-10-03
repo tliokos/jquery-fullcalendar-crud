@@ -4,8 +4,6 @@
 	
 	require_once('connect.php');
 
-	// Fetch all events
-	
 	$sth = $dbh->prepare("SELECT * FROM events WHERE id = ?");
 	
 	$sth->execute(array($_GET['id']));
