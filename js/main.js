@@ -18,12 +18,12 @@ $(function(){
         },
         // Get all events stored in database
         events: 'crud/getEvents.php',
-        // Handle click on a day in fullcalendar
+        // Handle Day Click
         dayClick: function(date, event, view) {
             currentDate = date.format();
             // Open modal to add event
             modal({
-                // Availale buttons when adding
+                // Available buttons when adding
                 buttons: {
                     add: {
                         id: 'add-event', // Buttons id
@@ -34,7 +34,7 @@ $(function(){
                 title: 'Add Event (' + date.format() + ')' // Modal title
             });
         },
-        // Event mouseover event
+        // Event Mouseover
         eventMouseover: function(calEvent, jsEvent, view){
             var tooltip = '<div class="event-tooltip">' + calEvent.description + '</div>';
             $("body").append(tooltip);
@@ -51,13 +51,13 @@ $(function(){
             $(this).css('z-index', 8);
             $('.event-tooltip').remove();
         },
-        // Handle click on an existing event
+        // Handle Existing Event Click
         eventClick: function(calEvent, jsEvent, view) {
             // Set currentEvent variable according to the event clicked in the calendar
             currentEvent = calEvent;
             // Open modal to edit or delete event
             modal({
-                // Availale buttons when editing
+                // Available buttons when editing
                 buttons: {
                     delete: {
                         id: 'delete-event',
@@ -75,19 +75,20 @@ $(function(){
             });
         }
     });
-
-    // Prepares the modal window according to the params passed
+    // Prepares the modal window according to data passed
     function modal(data) {
         // Set modal title
         $('.modal-title').html(data.title);
-        // Clear buttons
+        // Clear buttons except Cancel
         $('.modal-footer button:not(".btn-default")').remove();
         // Set input values
         $('#title').val(data.event ? data.event.title : '');
         if( ! data.event) {
+            // When adding set timepicker to current time
             var now = new Date();
             var time = now.getHours() + ':' + (now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes());
         } else {
+            // When editing set timepicker to event's time
             var time = data.event.date.split(' ')[1].slice(0, -3);
             time = time.charAt(0) === '0' ? time.slice(1) : time;
         }
@@ -101,7 +102,7 @@ $(function(){
         //Show Modal
         $('.modal').modal('show');
     }
-    // Handle click on Add Event Button
+    // Handle Click on Add Button
     $('.modal').on('click', '#add-event',  function(e){
         if(validator(['title', 'description'])) {
             $.post('crud/addEvent.php', {
@@ -115,14 +116,7 @@ $(function(){
             });
         }
     });
-    // Handle click on Delete Event Button
-    $('.modal').on('click', '#delete-event',  function(e){
-        $.get('crud/deleteEvent.php?id=' + currentEvent._id, function(result){
-            $('.modal').modal('hide');
-            $('#calendar').fullCalendar("refetchEvents");
-        });
-    });
-    // Handle click on Update Event Button
+    // Handle click on Update Button
     $('.modal').on('click', '#update-event',  function(e){
         if(validator(['title', 'description'])) {
             $.post('crud/updateEvent.php', {
@@ -136,12 +130,20 @@ $(function(){
                 $('#calendar').fullCalendar("refetchEvents");
             });
         }
-    })
+    });
+    // Handle Click on Delete Button
+    $('.modal').on('click', '#delete-event',  function(e){
+        $.get('crud/deleteEvent.php?id=' + currentEvent._id, function(result){
+            $('.modal').modal('hide');
+            $('#calendar').fullCalendar("refetchEvents");
+        });
+    });
+    // Get Formated Time From Timepicker
     function getTime() {
         var time = $('#time').val();
         return (time.indexOf(':') == 1 ? '0' + time : time) + ':00';
     }
-    // Basic validation for inputs
+    // Dead Basic Validation For Inputs
     function validator(elements) {
         var errors = 0;
         $.each(elements, function(index, element){
