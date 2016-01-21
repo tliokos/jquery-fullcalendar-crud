@@ -84,6 +84,7 @@ $(function() {
     });
     // Prepares the modal window according to data passed
     function modal(data) {
+
         // Set modal title
         $('.modal-title').html(data.title);
         // Clear buttons except Cancel
@@ -92,19 +93,14 @@ $(function() {
         $('#title').val(data.event ? data.event.title : '');
 
         if (data.event) {
-
             $('#allday').attr('checked', data.event.allDay);
-            var f = 'DD/MM/YYYY HH:mm';
-            if (data.event.allDay) {
-                f = 'DD/MM/YYYY';
-            }
-
+            var f = data.event.allDay ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm';
             $('#startDate').val(getDate(data.event.start, f));
             $('#endDate').val(getDate(data.event.end, f));
-
         } else {
-
-            
+            $('#startDate').val(moment(currentDate, 'YYYY-MM-DD').format('DD/MM/YYYY HH:mm'));
+            $('#endDate').val('');
+            $('#allday').attr('checked', false);
         }
 
         $('#description').val(data.event ? data.event.description : '');
@@ -112,9 +108,9 @@ $(function() {
 
         // Create Butttons
         $.each(data.buttons, function(index, button) {
-                $('.modal-footer').prepend('<button type="button" id="' + button.id + '" class="btn ' + button.css + '">' + button.label + '</button>')
-            })
-            //Show Modal
+            $('.modal-footer').prepend('<button type="button" id="' + button.id + '" class="btn ' + button.css + '">' + button.label + '</button>')
+        });
+        //Show Modal
         $('.modal').modal('show');
     }
     // Handle Click on Add Button
@@ -188,5 +184,4 @@ $(function() {
         }
         return true;
     }
-
 });

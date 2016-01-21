@@ -34,22 +34,20 @@
                                     <input id="title" name="title" type="text" class="form-control input-md" />
                                 </div>
                             </div>
-							<div class="form-group">
-								<div class="col-md-offset-4 col-md-8">
-									<div class="checkbox">
-										<label>
-											<input id="allday" type="checkbox"> AllDay
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <div class="checkbox">
+                                        <label><input id="allday" type="checkbox"> AllDay</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-4 control-label" for="time">Start</label>
                                 <div class="col-md-4 input-append bootstrap-timepicker">
                                     <input id="startDate" name="startDate" type="text" class="form-control input-md datetime" />
                                 </div>
                             </div>
-							<div class="form-group">
+                            <div class="form-group">
                                 <label class="col-md-4 control-label" for="time">End</label>
                                 <div class="col-md-4 input-append bootstrap-timepicker">
                                     <input id="endDate" name="endDate" type="text" class="form-control input-md datetime" />
@@ -83,10 +81,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js"></script>
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/lang-all.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
         <script src='js/bootstrap-colorpicker.min.js'></script>
-
         <script src='js/main.js'></script>
     </body>
 </html>
