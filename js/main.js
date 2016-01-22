@@ -23,6 +23,7 @@ $(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+        editable: true,
         // Get all events stored in database
         events: 'crud/getEvents.php',
         // Handle Day Click
@@ -60,8 +61,8 @@ $(function() {
         },
         // Handle Existing Event Click
         eventClick: function(calEvent, jsEvent, view) {
-            // Set currentEvent variable according to the event clicked in the calendar
-            currentEvent = calEvent;
+            // Set currentEvent variable according to the event clicked in the calendar			
+			currentEvent = calEvent;
             // Open modal to edit or delete event
             modal({
                 // Available buttons when editing
@@ -80,7 +81,25 @@ $(function() {
                 title: 'Edit Event "' + calEvent.title + '"',
                 event: calEvent
             });
-        }
+        },
+		eventDrop: function(  event, delta, revertFunc, jsEvent, ui, view  ) {
+			$.post('crud/updateDropEvent.php', {
+                id: event.id,
+				allday: event.allDay ? '1' : '0',
+				start: event.start.format(),
+                end: event.end ? event.end.format() : null
+            }, function(result) {
+                // nothing
+            });
+		},
+		eventResize: function(event, delta, revertFunc) {
+			$.post('crud/updateResizeEvent.php', {
+                id: event.id,
+                end: event.end.format()
+            }, function(result) {
+                // nothing
+            });
+		}
     });
     // Prepares the modal window according to data passed
     function modal(data) {
